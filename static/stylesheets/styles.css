@@ -1,0 +1,112 @@
+
+.body, html {
+  height: 100%;
+  width: 100%;
+}
+
+.map {
+  height: 100vh;
+  width: 100%;
+  position: absolute
+}
+
+.toolbar {
+  height: 100%;
+  width: 360px;
+  box-shadow: 10px 0px 30px -10px;
+  position: absolute;
+  background: white;
+  transition-duration: 1s;
+  overflow: auto;
+}
+.toolbar .cross {
+  height: 40px;
+  width: 20px;
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  border-radius: 3px;
+}
+
+.slideOut {
+  transform: translateX(720px);
+}
+
+.slideIn {
+  transform: translateX(-360px);
+}
+
+.cross {
+  position: relative;
+  border: solid 2px grey;
+  transition-duration: 0.8s;
+  display: inline-block;
+  height: 30px;
+  width: 40px;
+  border-radius: 5px;
+}
+.cross:hover {
+  background-color: grey;
+  border: solid 2px white;
+  cursor: pointer;
+}
+.cross .line1, .cross .line2 {
+  border: solid 0.1px;
+  width: 18px;
+  height: 3px;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  transition-duration: 0.8s;
+  color: white;
+  background-color: white;
+}
+.cross .line1 {
+  transform: translate(-50%, -200%);
+}
+.cross .line2 {
+  transform: translate(-50%, 180%);
+}
+.navbar{
+  padding: 0px;
+  margin: 0px;
+}
+
+.navigate .box {
+  display: inline-block;
+  top: 5px;
+  height: 40px;
+  width: 50px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.navigate .box:hover{
+  cursor: pointer;
+}
+
+.navigate{
+  width: 100%;
+  height: 50px;
+  background-color: black; 
+}
+
+.navigate .box .line1, .navigate .box .line2, .navigate .box .line3 {
+  border: solid 1px white;
+  margin-top: 4px;
+  width: 40%;
+  margin-left: 10px;
+}
+
+.headers{
+  color: white;
+  position: absolute;
+  display: inline-block;
+  border: solid, 1px, white;
+  font-size: 24px;
+  top:8px;
+  font-family: 微軟正黑體
+}
