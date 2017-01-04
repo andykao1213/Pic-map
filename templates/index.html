@@ -28,6 +28,7 @@
   <p id="status"></p>
   <img id="user_photo"></img>
   <p id="user_name"></p>
+  <button type="button" class="btn btn-danger" onclick="jumpToGallery()">Back To Gallery</button>
   <div id="list"></div>
   <div class="cross" onclick="slide()">
     <div class="line1" id="line1"></div>
@@ -45,6 +46,11 @@
 <script src="../static/js/fb.js"></script>
 <script src="../static/js/exif.js"></script>
 <script src="../static/js/myMap.js"></script>
+<script type="text/javascript">
+  function jumpToGallery(){
+    window.location.href = "http://140.114.86.246:5000/album";
+  }
+</script>
     
 
 </body>
