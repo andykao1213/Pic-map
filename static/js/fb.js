@@ -62,6 +62,13 @@ function testAPI(response) {
         var url = response.photos.paging.next;
         getPhotos(url)
     });
+    FB.api('/me?fields=friends{picture,name}', function(response){
+        var pictures = response.friends.data;
+        var l = pictures.length;
+        for(var i=0; i<l; i++) {
+            document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block" draggable="true" ondragstart="dragImage(event)" src="'+ pictures[i]['picture'].data.url + '"height="200">';
+        }
+    });
 }
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
