@@ -75,6 +75,17 @@ function testAPI(response) {
             getFriendsPicture(data[i].id);
         }
     });
+    // var dBtnInviteFriends = $('.inviteFriends');
+    var dBtnInviteFriends = document.getElementById('inviteFriends');
+    // dBtnInviteFriends.click(function(){
+        
+    // });
+    dBtnInviteFriends.addEventListener("click", function() {
+        FB.ui({
+          method: 'send',
+          link: '18av.mm-cg.com',
+        });
+    });
 }
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
