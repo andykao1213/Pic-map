@@ -8,7 +8,8 @@
   <link href="../static/stylesheets/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="../static/stylesheets/styles.css" rel="stylesheet" type="text/css">
   <link href="../static/stylesheets/myCss.css" rel="stylesheet" type="text/css">
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAuBwhpirNbGCekUZsZ9f2m1cycXasj8oE"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAuBwhpirNbGCekUZsZ9f2m1cycXasj8oE"></script>
+  <script type='text/javascript' src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>
   <style type="text/css">
   	* {
   position: relative;
@@ -78,7 +79,7 @@
   </style>
 </head>
 
-<body>
+<body onload="initialize()">
 <div class="navigate">
   <div class="box" onclick="slide()">
     <div class="line1"></div>
@@ -103,7 +104,7 @@
 	document.getElementById('gallery').innerHTML += '<div class="album"><div class="sibling"></div><div class="albumTitle">Add new</div></div>';
 
 	function go(){
-		window.location.href = "http://localhost:5000/index";
+		window.location.href = "http://140.114.86.246:5000/index";
 	}
 </script>    
 

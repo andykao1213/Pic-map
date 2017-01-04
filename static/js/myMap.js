@@ -1,4 +1,4 @@
-document.write("<script type='text/javascript' src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>");
+//document.write("<script type='text/javascript' src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>");
 //document.write("<script type='text/javascript' src='../static/exif.js'></script>");
 
 function getLocation(){
@@ -18,10 +18,10 @@ var map;
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var markerCluster; 
 
-
-navigator.geolocation.getCurrentPosition(initialize);
-function initialize(position) {
-
+var infoWindow = new google.maps.InfoWindow({map: map});
+//navigator.geolocation.getCurrentPosition(initialize);
+//function initialize(position) {
+function initialize() {
       var styleArray = [
   {
     "elementType": "geometry",
@@ -235,15 +235,29 @@ function initialize(position) {
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+     if (navigator.geolocation) { 
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
 
-    if(position){
-        map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-    }
-    var marker = new google.maps.Marker({ /* 一開始就有的 marker */
-        position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-        map: map,
-        title: '天龍國!!'
-    });
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          map.setCenter(pos);
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+    
+
+    // if(position){
+    //     map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+    // }
+
 
     google.maps.event.addListener(
         map,
@@ -257,7 +271,12 @@ function initialize(position) {
     clusterInit();
 }
 
-
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
 
     
 
@@ -293,10 +312,10 @@ function dragImage(ev){
                     icon: picIcon//,
                     //label: labels[(markers.length-1) % labels.length]
                 })
-                //markers.push(newMarker);
+                markers.push(newMarker);
                 markers.push(newMarker);
                 markerCluster.addMarker(newMarker, true);
-                console.log(markerCluster.getMarkers().length);
+                // console.log(markerCluster.getMarkers().length);
             //     markerCluster = new MarkerClusterer(map, markers2,
             // {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
