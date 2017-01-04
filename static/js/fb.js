@@ -33,6 +33,12 @@ function getPhotos(url) {
         }
     });
 }
+function getFriendsPicture(id) {
+    FB.api('/' + id + '/picture?type=large', function(response){
+        var url = response.data.url;
+        document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block" draggable="true" ondragstart="dragImage(event)" src="'+ url + '"height="200">';
+    });
+}
 function testAPI(response) {
     console.log('Welcome!  Fetching your information.... ');
     var uid = response.authResponse.userID;
@@ -62,11 +68,11 @@ function testAPI(response) {
         var url = response.photos.paging.next;
         getPhotos(url)
     });
-    FB.api('/me?fields=friends{picture,name}', function(response){
-        var pictures = response.friends.data;
-        var l = pictures.length;
+    FB.api('/me?fields=friends', function(response){
+        var data = response.friends.data;
+        var l = data.length;
         for(var i=0; i<l; i++) {
-            document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block" draggable="true" ondragstart="dragImage(event)" src="'+ pictures[i]['picture'].data.url + '"height="200">';
+            getFriendsPicture(data[i].id);
         }
     });
 }
