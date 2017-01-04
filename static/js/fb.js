@@ -36,7 +36,7 @@ function getPhotos(url) {
 function getFriendsPicture(id) {
     FB.api('/' + id + '/picture?type=large', function(response){
         var url = response.data.url;
-        document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block" draggable="true" ondragstart="dragImage(event)" src="'+ url + '"height="200">';
+        document.getElementById('friend').innerHTML += '<img class="headpic" src="'+ url + '">';
     });
 }
 function testAPI(response) {
@@ -85,6 +85,7 @@ function testAPI(response) {
           method: 'send',
           link: '18av.mm-cg.com',
         });
+        console.log("fuck");
     });
 }
 function statusChangeCallback(response) {

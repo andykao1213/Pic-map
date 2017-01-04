@@ -110,3 +110,38 @@
   top:8px;
   font-family: 微軟正黑體
 }
+
+#friend{
+  /*border: solid 1px black;*/
+  width: 20%;
+  height: 50px;
+  position: absolute;
+  display: inline-block;
+  right: 40px;
+  top: 60px;
+}
+.headpic{
+  /*border: solid 1px black;*/
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  background-size: cover;
+  float:right 
+}
+#inviteFriends{
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  float:right;
+  background-color: #F00C23;
+  color: white;
+  text-align: center;
+  font-size: 30px; 
+  position: absolute;
+  top: 60px;
+  right: 0px;
+}
+#inviteFriends:hover{
+  cursor: pointer;
+
+}
