@@ -1592,3 +1592,47 @@
 		body.is-loading #footer {
 			opacity: 0;
 		}
+
+		.pic{
+			width: 100px;
+			height: 100px;
+		}
+
+.album {
+  width: 240px;
+  height: 280px;
+  transition-duration: 2s;
+  position: relative;
+  display: inline-block;
+}
+
+.pic {
+  width: 200px;
+  height: 200px;
+  left: 8%;
+  top: 20px;
+  position: absolute;
+  display: inline-block;
+}
+
+.sibling {
+  width: 100%;
+  height: 100%;
+  transition-duration: 2s;
+}
+
+.album:hover {
+  cursor: pointer;
+}
+.album:hover .sibling {
+  background-color: white;
+  opacity: 0.4;
+  border: solid 2px white;
+}
+
+.albumTitle {
+  position: absolute;
+  top: 240px;
+  left: 35%;
+  color: white;
+}

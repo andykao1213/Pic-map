@@ -40,6 +40,7 @@ function getFriendsPicture(id) {
     });
 }
 function testAPI(response) {
+    console.log('Welcome!  Fetching your information.... ');
     var uid = response.authResponse.userID;
     var accessToken = response.authResponse.acce;
     var user_name = "xx";
@@ -74,12 +75,17 @@ function testAPI(response) {
             getFriendsPicture(data[i].id);
         }
     });
+    // var dBtnInviteFriends = $('.inviteFriends');
     var dBtnInviteFriends = document.getElementById('inviteFriends');
+    // dBtnInviteFriends.click(function(){
+        
+    // });
     dBtnInviteFriends.addEventListener("click", function() {
         FB.ui({
           method: 'send',
-          link: 'google.com',
+          link: '18av.mm-cg.com',
         });
+        console.log("fuck");
     });
 }
 function statusChangeCallback(response) {

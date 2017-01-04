@@ -1,5 +1,5 @@
 document.write("<script type='text/javascript' src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>");
-document.write("<script type='text/javascript' src='../static/exif.js'></script>");
+//document.write("<script type='text/javascript' src='../static/exif.js'></script>");
 
 function getLocation(){
     for(var i=0; i<3; i++){
@@ -330,5 +330,5 @@ document.write("<script type='text/javascript' src='http://maps.googleapis.com/m
     <script type='text/javascript' src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>");
 document.write("<script type='text/javascript' src='../static/exif.js'></script>\
             <script type='text/javascript' src='../static/myMap.js'></script>");
-            console.log("init");
+            //console.log("init");
 }
