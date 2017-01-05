@@ -308,13 +308,13 @@ function dragImage(ev){
                 var newMarker = new google.maps.Marker({
                     position: e.latLng,
                     map: map,
-                    draggable: true,
+                    draggable: false,
                     animation: google.maps.Animation.DROP,
                     icon: picIcon//,
                     //label: labels[(markers.length-1) % labels.length]
                 })
                 console.log('fuck');
-                newMarker.addListener('click', function(){
+                /* newMarker.addListener('click', function(){
                   console.log(this);
                   this.setIcon(null);
                   this.setMap(null);
@@ -324,7 +324,7 @@ function dragImage(ev){
                   }
                   console.log(markers.length);
                   markerCluster.removeMarker(newMarker, true);
-                });
+                }); */
                 newMarker.addListener('mouseover', mouseInPhoto);
                 newMarker.addListener('mouseout', mouseOutPhoto);
                 newMarker.addListener('dblclick', dblclickOnPhoto);
