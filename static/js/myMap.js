@@ -289,11 +289,7 @@ function dropInMap(ev) {
 
     }
 
-var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '<button type="button" class="btn btn-danger" onclick="deleteMarker()">Delete</button>'+
-      '</div>'+
-      '</div>';
+var contentString = '<button type="button" class="btn btn-danger" onclick="deleteMarker()">Delete</button>';
 function dragImage(ev){
     ev.dataTransfer.setData('imgSrc', ev.target.src);
 
