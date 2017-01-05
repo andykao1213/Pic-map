@@ -25,7 +25,13 @@ function getPhotos(url) {
     $.getJSON(url, function(data) {
         var imgs = data.data;
         var l = imgs.length;
+        var nowTime = imgs[0].created_time.substring(0,7);
+        document.getElementById('list').innerHTML += '<br>' + nowTime + '<br>';
         for(var i=0; i<l; i++){
+            if(imgs[i].created_time.substring(0,7) != nowTime){
+                nowTime = imgs[i].created_time.substring(0,7);
+                document.getElementById('list').innerHTML += '<br>' + nowTime + '<br>';
+            }
             document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block" draggable="true" ondragstart="dragImage(event)" src="'+ imgs[i]['images'][1].source + '"height="200">';
         }
         if (data.paging.next){
@@ -59,10 +65,16 @@ function testAPI(response) {
         var img_url = response.data['url'];
         document.getElementById('user_photo').src = img_url;
     });
-    FB.api('/me?fields=photos{images}', function(response){
+    FB.api('/me?fields=photos{images,created_time}', function(response){
         var imgs = response.photos.data;
         var l = imgs.length;
+        var nowTime = imgs[0].created_time.substring(0,7);
+        document.getElementById('list').innerHTML += nowTime + '<br>';
         for(var i=0; i<l; i++){
+            if(imgs[i].created_time.substring(0,7) != nowTime){
+                nowTime = imgs[i].created_time.substring(0,7);
+                document.getElementById('list').innerHTML += '<br>' + nowTime + '<br>';
+            }
             document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block" draggable="true" ondragstart="dragImage(event)" src="'+ imgs[i]['images'][1].source + '"height="200">';
         }
         var url = response.photos.paging.next;
@@ -83,7 +95,7 @@ function testAPI(response) {
     dBtnInviteFriends.addEventListener("click", function() {
         FB.ui({
           method: 'send',
-          link: '18av.mm-cg.com',
+          link: location.href,
         });
         console.log("fuck");
     });
