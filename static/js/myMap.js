@@ -17,6 +17,7 @@ var markers2 = [];
 var map;
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var markerCluster; 
+var markerFocus;
 
 var infoWindow = new google.maps.InfoWindow({map: map});
 //navigator.geolocation.getCurrentPosition(initialize);
@@ -288,7 +289,11 @@ function dropInMap(ev) {
 
     }
 
-
+var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '<button type="button" class="btn btn-danger" onclick="deleteMarker()">Delete</button>'+
+      '</div>'+
+      '</div>';
 function dragImage(ev){
     ev.dataTransfer.setData('imgSrc', ev.target.src);
 
@@ -313,18 +318,14 @@ function dragImage(ev){
                     icon: picIcon//,
                     //label: labels[(markers.length-1) % labels.length]
                 })
-                console.log('fuck');
-                /* newMarker.addListener('click', function(){
-                  console.log(this);
-                  this.setIcon(null);
-                  this.setMap(null);
-                  var index = markers.indexOf(this);
-                  if (index > -1) {
-                    markers.splice(index, 1);
-                  }
-                  console.log(markers.length);
-                  markerCluster.removeMarker(newMarker, true);
-                }); */
+                var infowindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                newMarker.addListener('click', function(){
+                  infowindow.open(map, this);
+                  markerFocus = this;
+                });
+
                 newMarker.addListener('mouseover', mouseInPhoto);
                 newMarker.addListener('mouseout', mouseOutPhoto);
                 newMarker.addListener('dblclick', dblclickOnPhoto);
@@ -338,6 +339,17 @@ function dragImage(ev){
             }
         );
 }
+
+function deleteMarker(){
+  markerFocus.setIcon(null);
+  markerFocus.setMap(null);
+  var index = markers.indexOf(markerFocus);
+  if (index > -1) {
+    markers.splice(index, 1);
+  }
+  markerCluster.removeMarker(markerFocus, true);
+}
+
 function drag(ev) {
     ev.dataTransfer.setData('text', ev.target.id);
     console.log("drag");
