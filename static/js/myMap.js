@@ -288,6 +288,7 @@ function dropInMap(ev) {
 
     }
 
+
 function dragImage(ev){
     ev.dataTransfer.setData('imgSrc', ev.target.src);
 
@@ -312,8 +313,23 @@ function dragImage(ev){
                     icon: picIcon//,
                     //label: labels[(markers.length-1) % labels.length]
                 })
+                console.log('fuck');
+                newMarker.addListener('click', function(){
+                  console.log(this);
+                  this.setIcon(null);
+                  this.setMap(null);
+                  var index = markers.indexOf(this);
+                  if (index > -1) {
+                    markers.splice(index, 1);
+                  }
+                  console.log(markers.length);
+                  markerCluster.removeMarker(newMarker, true);
+                });
+                newMarker.addListener('mouseover', mouseInPhoto);
+                newMarker.addListener('mouseout', mouseOutPhoto);
+                newMarker.addListener('dblclick', dblclickOnPhoto);
                 markers.push(newMarker);
-                markers.push(newMarker);
+                //markers.push(newMarker);
                 markerCluster.addMarker(newMarker, true);
                 // console.log(markerCluster.getMarkers().length);
             //     markerCluster = new MarkerClusterer(map, markers2,
@@ -322,19 +338,20 @@ function dragImage(ev){
             }
         );
 }
-
 function drag(ev) {
     ev.dataTransfer.setData('text', ev.target.id);
+    console.log("drag");
 }
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData('text');
     
     ev.target.appendChild(document.getElementById(data));
+    console.log("drop");
 }
 function allowDrop(ev) {
     ev.preventDefault();
-
+    console.log("allowDrop");
 }
 function clusterInit(){
     
