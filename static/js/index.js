@@ -3,14 +3,14 @@ var toolbar_show=1
 function slide(){
   if(toolbar_show == 1){   
     document.getElementById("toolbar").style.transform = "translateX(-360px)";
-    document.getElementById("line1").style.transform = "translate(-50%, -200%) rotate(45deg)"
-    document.getElementById("line2").style.transform = "translate(-50%, 180%) rotate(-45deg)"
+    //document.getElementById("line1").style.transform = "translate(-50%, -200%) rotate(45deg)"
+    //document.getElementById("line2").style.transform = "translate(-50%, 180%) rotate(-45deg)"
     toolbar_show=0;
   }   
   else{    
     document.getElementById("toolbar").style.transform = "translateX(0px)";
-    document.getElementById("line1").style.transform = "translate(-50%, -200%) rotate(-45deg)"
-    document.getElementById("line2").style.transform = "translate(-50%, 180%) rotate(45deg)"
+    //document.getElementById("line1").style.transform = "translate(-50%, -200%) rotate(-45deg)"
+    //document.getElementById("line2").style.transform = "translate(-50%, 180%) rotate(45deg)"
     toolbar_show = 1;
   }
 }

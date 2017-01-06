@@ -2,14 +2,18 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>SCAD Final</title>
+  <title>Album-PicMap</title>
   
   
   <link href="../static/stylesheets/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="../static/stylesheets/styles.css" rel="stylesheet" type="text/css">
   <link href="../static/stylesheets/myCss.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito|Raleway"" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAuBwhpirNbGCekUZsZ9f2m1cycXasj8oE"></script>
   <script type='text/javascript' src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 </head>
@@ -25,19 +29,13 @@
 </div>
 <div id="map" class="map"></div> 
 <div class="toolbar" id="toolbar">
-  <p id="status"></p>
   <img id="user_photo"></img>
   <p id="user_name"></p>
-  <button type="button" class="btn btn-danger" onclick="jumpToGallery()">Back To Gallery</button>
-  <div id="list"></div>
-  <div class="cross" onclick="slide()">
-    <div class="line1" id="line1"></div>
-    <div class="line2" id="line2"></div>
+  <button type="button" class="btn btn-default btn-lg btn-block" onclick="jumpToGallery()">Back to Gallery</button>
+  <div id="list">
   </div>
 </div>
-<div id="friend">
-
-</div>
+<div id="friend"></div>
 <div id="inviteFriends">+</div>
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -49,7 +47,7 @@
 <script src="../static/js/myMapEX.js"></script>
 <script type="text/javascript">
   function jumpToGallery(){
-    window.location.href = "http://140.114.197.41:5000/album";
+    window.location.href = "http://http://140.114.197.41/:5000/album";
   }
 </script>
     
