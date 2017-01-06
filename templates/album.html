@@ -2,12 +2,14 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>SCAD Final</title>
+  <title>Gallery-PicMap</title>
   
   
   <link href="../static/stylesheets/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="../static/stylesheets/styles.css" rel="stylesheet" type="text/css">
   <link href="../static/stylesheets/myCss.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito|Raleway"" rel="stylesheet">
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAuBwhpirNbGCekUZsZ9f2m1cycXasj8oE"></script>
   <script type='text/javascript' src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>
   <style type="text/css">
@@ -71,9 +73,29 @@
 }
 
 .head {
-  color: white;
-  font-size: 48px;
-  margin-left: 30px;
+    border-bottom: solid 1px #ffffff;
+    width: -moz-max-content;
+    width: -webkit-max-content;
+    width: -ms-max-content;
+    width: max-content;
+    padding-bottom: 0.5rem;
+    margin: 0 0 2rem 0;
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-size: 3rem;
+    line-height: 1.4;
+    letter-spacing: 2rem;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+#headGallery{
+  margin-left: 50px;
+  padding-top: 60px;
 }
 
   </style>
@@ -91,7 +113,7 @@
 <div id="map" class="map"></div> 
 <div class="gallery" id='gallery'>
   <div class="siblings"></div>
-  <div class="head">Gallery</div>
+  <div class="head" id="headGallery">Gallery</div>
 </div>
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>

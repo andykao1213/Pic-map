@@ -13,11 +13,13 @@
 .toolbar {
   height: 93%;
   width: 360px;
-  box-shadow: 10px 0px 30px -10px;
+  box-shadow: 5px 0px 30px -10px;
   position: absolute;
   background: white;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
   overflow: auto;
+  background-color: #f3f3f3;
+
 }
 .toolbar .cross {
   height: 40px;
@@ -26,6 +28,8 @@
   right: -20px;
   top: 50%;
   border-radius: 3px;
+  float: left;
+  
 }
 
 .slideOut {
@@ -108,7 +112,7 @@
   border: solid, 1px, white;
   font-size: 24px;
   top:8px;
-  font-family: 微軟正黑體
+  font-family: 'Raleway', sans-serif;
 }
 
 #friend{
@@ -133,13 +137,14 @@
   width: 40px;
   border-radius: 100%;
   float:right;
-  background-color: #F00C23;
+  background-color: rgb(244, 67, 54);
   color: white;
   text-align: center;
   font-size: 30px; 
   position: absolute;
   top: 60px;
   right: 0px;
+  box-shadow: 0px 6px 14px -10px black;
 }
 #inviteFriends:hover{
   cursor: pointer;
@@ -153,3 +158,34 @@
   position: absolute;
   display: inline-block;
 }
+#user_photo{
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  margin-left: 40%; 
+  margin-top: 20px;
+  border: solid 1px #D9D9D9
+  /*position: absolute;*/
+}
+#user_name{
+  text-align: center;
+  font-family: 微軟正黑體;
+  color: #333;
+  font-weight: 900;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.timing{
+  font-family: 微軟正黑體;
+  color: #333;
+  margin-top: 10px
+  margin-bottom: 10px;
+  text-align: center;
+}
+.markerImg{
+  margin: 2px;
+}
+
+
+

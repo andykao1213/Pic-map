@@ -26,13 +26,13 @@ function getPhotos(url) {
         var imgs = data.data;
         var l = imgs.length;
         var nowTime = imgs[0].created_time.substring(0,7);
-        document.getElementById('list').innerHTML += '<br>' + nowTime + '<br>';
+        document.getElementById('list').innerHTML += '<br><h4 class="timing">' + nowTime + '</h4><br>';
         for(var i=0; i<l; i++){
             if(imgs[i].created_time.substring(0,7) != nowTime){
                 nowTime = imgs[i].created_time.substring(0,7);
-                document.getElementById('list').innerHTML += '<br>' + nowTime + '<br>';
+                document.getElementById('list').innerHTML += '<br><h4 class="timing">' + nowTime + '</h4><br>';
             }
-            document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block" draggable="true" ondragstart="dragImage(event)" src="'+ imgs[i]['images'][1].source + '"height="200">';
+            document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block markerImg" draggable="true" ondragstart="dragImage(event)" src="'+ imgs[i]['images'][1].source + '"height="200">';
         }
         if (data.paging.next){
             getPhotos(data.paging.next)
@@ -52,8 +52,8 @@ function testAPI(response) {
     var user_name = "xx";
     var img_url = "oo";
     FB.api('/' + uid, function(response) {
-        document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
+        /*document.getElementById('status').innerHTML =
+            'Thanks for logging in, ' + response.name + '!';*/
     });
 
     FB.api('/' + uid, function(response) {
@@ -69,13 +69,13 @@ function testAPI(response) {
         var imgs = response.photos.data;
         var l = imgs.length;
         var nowTime = imgs[0].created_time.substring(0,7);
-        document.getElementById('list').innerHTML += nowTime + '<br>';
+        document.getElementById('list').innerHTML += '<h4 class="timing">'+nowTime + '</h4><br>';
         for(var i=0; i<l; i++){
             if(imgs[i].created_time.substring(0,7) != nowTime){
                 nowTime = imgs[i].created_time.substring(0,7);
-                document.getElementById('list').innerHTML += '<br>' + nowTime + '<br>';
+                document.getElementById('list').innerHTML += '<br><h4 class="timing">' + nowTime + '</h4><br>';
             }
-            document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block" draggable="true" ondragstart="dragImage(event)" src="'+ imgs[i]['images'][1].source + '"height="200">';
+            document.getElementById('list').innerHTML += '<img class="display rounded mx-auto d-block markerImg" draggable="true" ondragstart="dragImage(event)" src="'+ imgs[i]['images'][1].source + '"height="200">';
         }
         var url = response.photos.paging.next;
         getPhotos(url)
