@@ -17,15 +17,14 @@
   4. 分享-分享這個地圖相簿給你的好友，一起觀賞你的旅遊回憶 
 
 ## 畫面
-
 1. 進入畫面
-  ![Alt text](/path/to/img.jpg)
+  ![Alt text](https://github.com/andykao1213/Pic-map/blob/master/screenshot/螢幕快照%202018-05-15%20上午10.08.47.png?raw=true)
 2. 按下Get Started後，使用FB登入
-  ![Alt text](/path/to/img.jpg)
+  ![Alt text](https://github.com/andykao1213/Pic-map/blob/master/screenshot/螢幕快照%202018-05-15%20上午10.08.58.png?raw=true)
 3. 進入自己的Album
-  ![Alt text](/path/to/img.jpg)
+  ![Alt text](https://github.com/andykao1213/Pic-map/blob/master/screenshot/螢幕快照%202018-05-15%20上午10.09.15.png?raw=true)
 4. Album畫面：左邊可以拖曳圖片進去地圖，右上角可以邀請朋友共編
-  ![Alt text](/path/to/img.jpg)
+  ![Alt text](https://github.com/andykao1213/Pic-map/blob/master/screenshot/螢幕快照%202018-05-15%20上午10.09.51.png?raw=true)
 5. 相片間的距離過近，拉遠時會自動結合成一個數字區塊
-  ![Alt text](/path/to/img.jpg)
+  ![Alt text](https://github.com/andykao1213/Pic-map/blob/master/screenshot/螢幕快照%202018-05-15%20上午10.10.04.png?raw=true)
 6. 如果按下Get Traveling， PicMap就會依照時間順序帶領s你在地圖上遨遊，觀賞自己在世界各地的足跡!
