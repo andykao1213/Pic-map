@@ -11,10 +11,21 @@
   結合三者，我們設計出了”PicMap”，一個地圖相簿，能讓使用者在地圖上輕易 的編輯、閱讀旅遊回憶。
   
   以下是使用者流程的設計
-  ```flow 
-  a=>inputoutput:創建-以Facebook登入，建立一個全新的地圖相簿 
-  b=>inputoutput:邀請-邀請好友與你一起放上屬於這趟旅程的照片 
-  c=>inputoutput:編輯-將自己的照片放上地圖 d=>inputoutput:分享-分享這個地圖相簿給你的好友，一起觀賞你的旅遊回憶 
-  
-  a-b-c-d
-  ```
+  1. 創建-以Facebook登入，建立一個全新的地圖相簿 
+  2. 邀請-邀請好友與你一起放上屬於這趟旅程的照片 
+  3. 編輯-將自己的照片放上地圖 
+  4. 分享-分享這個地圖相簿給你的好友，一起觀賞你的旅遊回憶 
+
+## 畫面
+
+1. 進入畫面
+  ![Alt text](/path/to/img.jpg)
+2. 按下Get Started後，使用FB登入
+  ![Alt text](/path/to/img.jpg)
+3. 進入自己的Album
+  ![Alt text](/path/to/img.jpg)
+4. Album畫面：左邊可以拖曳圖片進去地圖，右上角可以邀請朋友共編
+  ![Alt text](/path/to/img.jpg)
+5. 相片間的距離過近，拉遠時會自動結合成一個數字區塊
+  ![Alt text](/path/to/img.jpg)
+6. 如果按下Get Traveling， PicMap就會依照時間順序帶領s你在地圖上遨遊，觀賞自己在世界各地的足跡!
