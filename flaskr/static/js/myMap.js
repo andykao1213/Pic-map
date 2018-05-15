@@ -23,6 +23,7 @@ var infoWindow = new google.maps.InfoWindow({map: map});
 //navigator.geolocation.getCurrentPosition(initialize);
 //function initialize(position) {
 function initialize() {
+
       var styleArray = [
   {
     "elementType": "geometry",
@@ -270,6 +271,9 @@ function initialize() {
     document.getElementById('map').addEventListener('drop', dropInMap);
     document.getElementById('map').addEventListener('dragover', allowDrop);
     clusterInit();
+
+    restoreMarkers();
+
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -285,7 +289,6 @@ function dropInMap(ev) {
     ev.preventDefault();
 
     var data = ev.dataTransfer.getData('imgSrc');
-    console.log('dropInMap') ;
 
     }
 
@@ -293,50 +296,101 @@ var contentString = '<button type="button" class="btn btn-danger" onclick="delet
 function dragImage(ev){
     ev.dataTransfer.setData('imgSrc', ev.target.src);
 
+    console.log('DragImage: '+ev.target.src);
+    google.maps.event.addListener(
+            map,
+            'mouseover',
+            function(e){
+              addNewMarker(e.latLng.lat(), e.latLng.lng(), ev.target.src);
+            }
+        );
+}
+
+function addNewMarker(lat, lng, imgSrc){
+    position = new google.maps.LatLng(lat, lng);
     var picIcon = new google.maps.MarkerImage(
-        ev.target.src, 
+        imgSrc,
         null, /* size is determined at runtime */
         null, /* origin is 0,0 */
         null, /* anchor is bottom center of the scaled image */
         new google.maps.Size(80, 60)
     );   
-    console.log('DragImage: '+ev.target.src);
-    google.maps.event.addListener(
-            map,
-            'mouseover',
-            function(e) {
-                // 如果要每點一下就有一個 marker，則使用此段
-                var newMarker = new google.maps.Marker({
-                    position: e.latLng,
-                    map: map,
-                    draggable: false,
-                    animation: google.maps.Animation.DROP,
-                    icon: picIcon//,
-                    //label: labels[(markers.length-1) % labels.length]
-                })
-                var infowindow = new google.maps.InfoWindow({
-                  content: contentString
-                });
-                newMarker.addListener('click', function(){
-                  infowindow.open(map, this);
-                  markerFocus = this;
-                });
 
-                newMarker.addListener('mouseover', mouseInPhoto);
-                newMarker.addListener('mouseout', mouseOutPhoto);
-                newMarker.addListener('dblclick', dblclickOnPhoto);
-                markers.push(newMarker);
-                //markers.push(newMarker);
-                markerCluster.addMarker(newMarker, true);
-                // console.log(markerCluster.getMarkers().length);
-            //     markerCluster = new MarkerClusterer(map, markers2,
-            // {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    // 如果要每點一下就有一個 marker，則使用此段
+    var newMarker = new google.maps.Marker({
+        position: position,
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP,
+        icon: picIcon//,
+        //label: labels[(markers.length-1) % labels.length]
+    })
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    newMarker.addListener('click', function(){
+      infowindow.open(map, this);
+      markerFocus = this;
+    });
+    newMarker.addListener('mouseover', mouseInPhoto);
+    newMarker.addListener('mouseout', mouseOutPhoto);
+    newMarker.addListener('dblclick', dblclickOnPhoto);
+    markers.push(newMarker);
+    
+    //markers.push(newMarker);
+    markerCluster.addMarker(newMarker, true);
+    // console.log(markerCluster.getMarkers().length);
+//     markerCluster = new MarkerClusterer(map, markers2,
+// {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
-            }
-        );
+    passToBack(newMarker);
+}
+
+/*
+$(function() {
+  var submit_form = function(e) {
+    $.getJSON($SCRIPT_ROOT + '/setMarker', {
+      lat: $('input[name="marker_lat"]').val(),
+      lng: $('input[name="marker_lng"]').val(), 
+      img: $('input[name="marker_img"]').val()
+    }, function(data) {
+      //$('#result').text(data.result);
+    });
+    return false;
+  };
+
+   $('button#send_marker').bind('click', submit_form);
+   
+});
+*/
+
+function passToBack(marker){
+    var lat = marker.position.lat();
+    var lng = marker.position.lng();
+    var img = marker.icon.url;
+
+    document.getElementById('marker_lat_i').value = lat;
+    document.getElementById('marker_lng_i').value = lng;
+    document.getElementById('marker_img_i').value = img;
+
+
+    //document.getElementById('marker_form').submit();
+    //document.getElementById('send_marker').click();
+    document.getElementById('calculate').click();
+    //$('a#calculate').bind('click', submit_form);
 }
 
 function deleteMarker(){
+  var lat = markerFocus.position.lat();
+  var lng = markerFocus.position.lng();
+  var img = markerFocus.icon.url;
+
+  document.getElementById('marker_lat_i').value = lat;
+  document.getElementById('marker_lng_i').value = lng;
+  document.getElementById('marker_img_i').value = img;
+
+  document.getElementById('delete').click();
+
   markerFocus.setIcon(null);
   markerFocus.setMap(null);
   var index = markers.indexOf(markerFocus);
@@ -344,6 +398,10 @@ function deleteMarker(){
     markers.splice(index, 1);
   }
   markerCluster.removeMarker(markerFocus, true);
+  
+  
+
+
 }
 
 function drag(ev) {
@@ -366,7 +424,6 @@ function clusterInit(){
     markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     
-    console.log('FIRST: '+markerCluster.getMarkers().length);
 }
 
 function init(){

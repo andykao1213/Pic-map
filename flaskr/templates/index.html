@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>SCAD Final</title>
+  
+  
+  <link href="../static/stylesheets/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="../static/stylesheets/styles.css" rel="stylesheet" type="text/css">
+  <link href="../static/stylesheets/myCss.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAuBwhpirNbGCekUZsZ9f2m1cycXasj8oE"></script>
+  <script type='text/javascript' src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'></script>
+
+
+</head>
+
+<body onload="initialize()">
+<div class="navigate">
+  <div class="box" onclick="slide()">
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+  </div>
+  <div class="headers" href="#">Pic Map</div>
+</div>
+<div id="map" class="map"></div> 
+<div class="toolbar" id="toolbar">
+<div style="display:none">
+    <h1>jQuery Example</h1>
+    <p>
+      <input type="text" size="5" value="1" name="a"> +
+      <input type="text" size="5" value="1" name="b"> =
+      <!--<span id="result">?</span>-->
+    </p>
+      <ul id="result">
+      </ul>
+
+    <p><a href=# id="calculate">calculate server side</a></p>
+    <p><a href=# id="delete">calculate server side</a></p>
+    <p><a href=# id="update">calculate server side</a></p>
+    <input id="marker_lat_i" type="text" name="marker_lat" value="0" >
+    <input id="marker_lng_i" type="text" name="marker_lng" value="0" >
+    <input id="marker_img_i" type="text" name="marker_img" value="0" >
+</div>
+
+  <p id="status"></p>
+  <p id="album_token">album_token: {{session.album_token}}</p>
+  <img id="user_photo"></img>
+  <p id="user_name"></p>
+  <button type="button" class="btn btn-danger" onclick="jumpToGallery()">Back To Gallery</button>
+  <button type="button" class="btn btn-danger" onclick="traveling()">Go Travelling!</button>
+  <div id="list"></div>
+  <div class="cross" onclick="slide()">
+    <div class="line1" id="line1"></div>
+    <div class="line2" id="line2"></div>
+  </div>
+</div>
+<div id="friend">
+
+</div>
+<div id="inviteFriends">+</div>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../static/js/index.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+<script src="../static/js/fb.js"></script>
+<script src="../static/js/exif.js"></script>
+<script src="../static/js/myMap.js"></script>
+<script src="../static/js/myMapEX.js"></script>
+<script type="text/javascript"
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<script type="text/javascript">
+  var isTravel = false;
+  var travelId = null;
+  var marker_id = 0;
+  function jumpToGallery(){
+    window.location.href = "http://140.114.197.41:5000/album";
+  }
+  function traveling(){
+    isTravel = !isTravel;
+    if(isTravel == true){
+        marker_id = 0;
+        travelId = setInterval(function(){
+          console.log(markers[marker_id]+", "+markers.length);
+          map.panTo(new google.maps.LatLng(markers[marker_id].position.lat(),markers[marker_id].position.lng()))
+          if(marker_id == markers.length){
+            marker_id = 0;
+          }
+          else{
+            marker_id++;
+          }
+        }, 3000);
+    }else {
+      
+        marker_id = 0;
+        clearInterval(travelId);
+    }
+  }
+</script>
+    
+      <!--<dd><input type="submit" name="New" value="NewRoom">-->
+<script>
+      
+      function restoreMarkers(){
+        console.log('resotre');
+        {% for entry in entries %}
+          var imgUrl = "{{entry.img}}";
+          imgUrl = imgUrl.replace("amp;", "");
+          
+          addNewMarker_restore({{entry.lat}}, {{entry.lng}}, imgUrl);
+        {% endfor %}
+      }
+function addNewMarker_restore(lat, lng, imgSrc){
+    position = new google.maps.LatLng(lat, lng);
+    var picIcon = new google.maps.MarkerImage(
+        imgSrc,
+        null, /* size is determined at runtime */
+        null, /* origin is 0,0 */
+        null, /* anchor is bottom center of the scaled image */
+        new google.maps.Size(80, 60)
+    );   
+
+    // 如果要每點一下就有一個 marker，則使用此段
+    var newMarker = new google.maps.Marker({
+        position: position,
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP,
+        icon: picIcon//,
+        //label: labels[(markers.length-1) % labels.length]
+    })
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    newMarker.addListener('click', function(){
+      infowindow.open(map, this);
+      markerFocus = this;
+    });
+    newMarker.addListener('mouseover', mouseInPhoto);
+    newMarker.addListener('mouseout', mouseOutPhoto);
+    newMarker.addListener('dblclick', dblclickOnPhoto);
+    markers.push(newMarker);
+    
+    //markers.push(newMarker);
+    markerCluster.addMarker(newMarker, true);
+    // console.log(markerCluster.getMarkers().length);
+//     markerCluster = new MarkerClusterer(map, markers2,
+// {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+}
+
+      
+</script>   
+<script type="text/javascript">
+  $(function() {
+    var submit_form = function(e) {
+
+      $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+        lat: $('input[name="marker_lat"]').val(),
+        lng: $('input[name="marker_lng"]').val(), 
+        img: $('input[name="marker_img"]').val(),
+        a: $('input[name="a"]').val(),
+        b: $('input[name="b"]').val(),
+        c: $('input[name="marker_img"]').val()
+      }, function(data) {
+      });
+      return false;
+    };
+
+    $('a#calculate').bind('click', submit_form);
+
+    var deleteMarker = function(e) {
+
+      $.getJSON($SCRIPT_ROOT + '/_del_numbers', {
+        lat: $('input[name="marker_lat"]').val(),
+        lng: $('input[name="marker_lng"]').val(), 
+        img: $('input[name="marker_img"]').val(),
+        a: $('input[name="a"]').val(),
+        b: $('input[name="b"]').val(),
+        c: $('input[name="marker_img"]').val()
+      }, function(data) {
+        //$('#result').text(data.result);
+      });
+      return false;
+    };
+
+    $('a#delete').bind('click', deleteMarker);
+
+    var updateMarker = function(e) {
+
+      $.getJSON($SCRIPT_ROOT + '/_update_numbers', {
+        lat: $('input[name="marker_lat"]').val(),
+        lng: $('input[name="marker_lng"]').val(), 
+        img: $('input[name="marker_img"]').val(),
+        a: $('input[name="a"]').val(),
+        b: $('input[name="b"]').val(),
+        c: $('input[name="marker_img"]').val()
+      }, function(data) {
+        //$('#result').text(data.result);
+      });
+      return false;
+    };
+
+    $('a#update').bind('click', updateMarker);
+  });
+</script>
+</body>
+</html>

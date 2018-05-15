@@ -79,7 +79,7 @@
   </style>
 </head>
 
-<body onload="initialize()">
+<body >
 <div class="navigate">
   <div class="box" onclick="slide()">
     <div class="line1"></div>
@@ -92,6 +92,23 @@
 <div class="gallery" id='gallery'>
   <div class="siblings"></div>
   <div class="head">Gallery</div>
+  <form id="album_form" action="{{ url_for('goToAlbum') }}" method="post">
+    <dl>
+    <input id="albumSelect_i" type="text" name="albumCommand" value="0" style="display:none">
+    {% for entry in entries %}
+       <!-- <dd><input type="submit" name="room" value={{entry.token}}><br/>-->
+      <div class="album" onclick="goToAlbum('{{entry.token}}')">
+        <div class="sibling"></div>
+        <img class="pic" src="https://lh4.ggpht.com/FUWsXiCVl9xt1bxfdtZk7QgMQpbui_uxv7qONujjFMrf-B-aU0N4gPJ9qY5hoBsoTuo=w300"/>
+        <div class="albumTitle">My Album {{entry.id}}</div>
+      </div>
+    {% else %}
+
+    {% endfor %}
+      <div class="album" onclick="addNewAlbum()"><div class="sibling"></div><div class="albumTitle">Add new</div></div>
+      <!--<dd><input type="submit" name="New" value="NewRoom">-->
+    </dl>
+  </form>
 </div>
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -99,12 +116,21 @@
 <script src="../static/js/myMap.js"></script>
 <script type="text/javascript">
 	var i;
-	for(i=0; i<6; i++)
+	/*for(i=0; i<6; i++)
 		document.getElementById('gallery').innerHTML += '<div class="album" onclick="go()"><div class="sibling"></div><img class="pic" src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/15578688_1354536817899336_491483226609685568_n.jpg?oh=e0566742c7d5a95387291d8ed7a2250d&amp;oe=58E67847"/><div class="albumTitle">My album</div></div>';
 	document.getElementById('gallery').innerHTML += '<div class="album"><div class="sibling"></div><div class="albumTitle">Add new</div></div>';
+*/
+	function goToAlbum(token){
+    console.log("albumToken: "+token)
+    document.getElementById('albumSelect_i').value = token;
+    document.getElementById('album_form').submit();
+		//window.location.href = "http://140.114.197.41:5000/index";
+	}
 
-	function go(){
-		window.location.href = "http://140.114.197.41:5000/index";
+	function addNewAlbum(){
+    document.getElementById('albumSelect_i').value = "add";
+    document.getElementById('album_form').submit();
+		//window.location.href = "http://140.114.197.41:5000/index";
 	}
 </script>    
 

@@ -26,7 +26,21 @@
 			}(document, 'script', 'facebook-jssdk'));
 
 			function jump(){
-				window.location.href = "http://140.114.197.41:5000/album";
+				FB.getLoginStatus(function(response) {
+					if (response.status === 'connected') {
+						// Logged into your app and Facebook.
+						var uid = response.authResponse.userID;
+						document.getElementById('username_i').value = "fb_"+uid;
+						document.getElementById('password_i').value = uid;
+						document.getElementById('login_form').submit();
+						//window.location.href = "http://140.114.197.41:5000/album";
+
+					} else if (response.status === 'not_authorized') {
+						alert('not authorized');
+					} else {
+						alert('login failed');
+				}
+				});
 			}
 		</script>
 		<!-- Wrapper -->
@@ -57,12 +71,21 @@
 						<!-- GET STARTED -->
 							<article id="start">
 								<h2 class="major">LogIn</h2>
-								<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false" onlogin="jump()"></div>
+
+								<form id="login_form" action="{{ url_for('login') }}" method="post">
+									<dl>
+									<dd><input id="username_i" type="text" name="username" style="display:none">
+									<dd><input id="password_i" type="password" name="password" style="display:none">
+									<div id="login_btn" class="fb-login-button" type="submit" value="Login" data-max-rows="1" 
+										data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin="jump()"></div>
+								    
+									</dl>
+								</form>
 							</article>
 						<!-- Intro -->
 							<article id="intro">
 								<h2 class="major">Intro</h2>
-								<span class="image main"><img src="../static/images/pic01.jpg" alt="" /></span>
+								<span class="image main"><img height="280px" src="https://www.socialsamosa.com/wp-content/uploads/2014/11/bored-cat_Fotor.jpg" alt="" /></span>
 								<p style="font-family: 微軟正黑體">是否對於單純分享自己po的FB照片感到索然無味?<br>是否時常旅行卻不知道自己到底走過了哪些地方?<br>是否想製作一本獨特的相簿卻又不知道從何下手?<br>那就廢話不多說趕快加入PicMap吧!!<br>在這裡你(妳)可以將自己po過或是被tag的FB照片拖曳至google map上製作成一本一本的相簿，並將自己製作的相簿跟好友分享，也可以與好友共同編輯一本相簿，共同創造出屬於你(妳)們的共同回憶吧!!</p>
 								<p></p>
 							</article>
